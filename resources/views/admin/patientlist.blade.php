@@ -37,6 +37,7 @@
                 <th scope="col">Actions</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">ID Picture</th>
                 <th scope="col">Contact Number</th>
                 <th scope="col">Address</th>
                 <th scope="col">Date</th>
@@ -55,7 +56,9 @@
                       <td>
                           {{  $patient->email ?? '' }}
                       </td>
-
+                      <td>
+                        <a href="/assets/img/id/{{$patient->id_picture}}" target="_blank">{{$patient->id_picture ?? ''}}</a>
+                      </td>
                       <td>
                             {{  $patient->contact_number ?? '' }}
                       </td>
