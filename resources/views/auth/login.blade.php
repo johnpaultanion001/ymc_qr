@@ -41,6 +41,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                   
                 </div>
                 <div class="input-group">
                   <div class="input-group-prepend">
