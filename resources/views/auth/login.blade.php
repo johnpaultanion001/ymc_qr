@@ -35,14 +35,17 @@
                       <i class="fas fa-user fa-lg"></i>
                     </span>
                   </div>
+                  
                   <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Email Or Phone Number" value="{{ old('username') }}" required autocomplete="username" autofocus>
                     @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                   
                 </div>
+                @if(session()->has('error_login'))
+                        <strong class="text-danger">{{ session()->get('error_login') }}</strong>
+                  @endif
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
