@@ -15,6 +15,16 @@
                       Patients
                 @elseif(request()->is('admin/services'))
                       Services
+                @elseif(request()->is('admin/doctors'))
+                      Doctors
+                @elseif(request()->is('admin/historical/filter/*'))
+                      Historical Data
+                @elseif(request()->is('admin/activity_log'))
+                      Activity Log  
+                @elseif(request()->is('admin/doctor/account'))
+                      Account
+                @elseif(request()->is('admin/doctor/appointments'))
+                    Appointments
                 @endif
                 
                  

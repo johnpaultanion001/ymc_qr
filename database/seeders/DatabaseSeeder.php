@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AnnouncementsSeeder::class,
             ServiceSeeder::class,
+            DoctorSeeder::class,
         ]);
     }
 }

@@ -38,6 +38,7 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">Actions</th>
+                <th scope="col">Cetegory</th>
                 <th scope="col">Service ID</th>
                 <th scope="col">Service Name</th>
                 <th scope="col">Slots</th>
@@ -52,13 +53,16 @@
                           <button type="button" name="remove" remove="{{  $service->id ?? '' }}" class="remove btn btn-sm btn-danger text-uppercase">Remove</button>
                       </td>
                       <td>
+                          {{  $service->category ?? '' }}
+                      </td>
+                      <td>
                           {{  $service->id ?? '' }}
                       </td>
                       <td>
                           {{  $service->name ?? '' }}
                       </td>
                       <td>
-                          {{  $service->slots ?? '' }}
+                          {{  $service->doctors()->count() ?? '' }}
                       </td>
                       <td>
                           {{ \Carbon\Carbon::parse($service->created_at)->isoFormat('MMM Do YYYY h:s A')}}
@@ -91,20 +95,24 @@
                   
                   
                 <div class="form-group">
+                  <label for="category" class="bmd-label-floating">Category: <span class="text-danger">*</span></label>
+                  <select name="category" id="category" class="select2 form-control">
+                        <option value="MEDICAL SERVICES">MEDICAL SERVICES</option>
+                        <option value="LABORATORY TEST">LABORATORY TEST</option>
+                  </select>
+                  <span class="invalid-feedback" role="alert">
+                      <strong id="error-category"></strong>
+                  </span>
+                </div>
+
+                <div class="form-group">
                   <label for="name" class="bmd-label-floating">Name: <span class="text-danger">*</span></label>
                   <input type="text" class="form-control name" name="name" id="name"/>
                   <span class="invalid-feedback" role="alert">
                       <strong id="error-name"></strong>
                   </span>
                 </div>
-                <div class="form-group">
-                  <label for="slots" class="bmd-label-floating">Slots: <span class="text-danger">*</span></label>
-                  <input type="number" class="form-control slots" name="slots" id="slots"/>
-                  <span class="invalid-feedback" role="alert">
-                      <strong id="error-slots"></strong>
-                  </span>
-                </div>
-
+            
                 <input type="hidden" name="action" id="action" value="Add" />
                 <input type="hidden" name="hidden_id" id="hidden_id" />
               

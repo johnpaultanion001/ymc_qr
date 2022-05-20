@@ -135,15 +135,15 @@
           </div>
           
 
-          <div class="modal-footer">
-          <button type="button" id="password_default" class="btn text-warning btn-link">Set A Default Password</button>
-            <input type="submit" name="action_button" id="action_button" class="btn btn-link text-primary" value="Save" />
-            <button type="button" class="btn text-danger btn-link" data-dismiss="modal">Close</button>
-          </div>
+        <div class="modal-footer">
+        <button type="button" id="password_default" class="btn text-warning btn-link">Set A Default Password</button>
+          <input type="submit" name="action_button" id="action_button" class="btn btn-link text-primary" value="Save" />
+          <button type="button" class="btn text-danger btn-link" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
-  </form>
+  </div>
+</form>
 
 @section('footer')
     @include('../partials.admin.footer')

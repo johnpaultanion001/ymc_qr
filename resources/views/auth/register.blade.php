@@ -49,6 +49,15 @@
                     @enderror
                   </div>
                   <div class="form-group">
+                    <label for="contact_number" class="bmd-label-floating">Contact Number <span class="text-danger">*</span></label>
+                    <input type="number" id="contact_number" name="contact_number" class="form-control @error('contact_number') is-invalid @enderror"  value="{{ old('contact_number') }}" required autocomplete="contact_number">
+                    @error('contact_number')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  </div>
+                  <div class="form-group">
                     <label for="password"class="bmd-label-floating" >Password <span class="text-danger">*</span></label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" >
                     <span toggle="#current_password-field" class="fa fa-fw fa-eye field_icon toggle-current_password" style="float: right; margin-left: -25px; margin-top: -22px; position: relative; z-index: 2;"></span>   

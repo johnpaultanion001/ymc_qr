@@ -36,7 +36,11 @@
                 <a href="/patient/appointment" class="dropdown-item">
                   <i class="far fa-calendar-plus fa-lg p-2"></i> Appointment
                 </a>
+                <a href="/admin/patients/finder/doctor" class="dropdown-item">
+                  <i class="fas fa-search fa-lg p-2"></i> Finder Doctor
+                </a>
               </div>
+              
             </li>
 
             

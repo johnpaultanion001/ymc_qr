@@ -115,7 +115,7 @@
                      
                       <div class="tab-content tab-space">
                         
-                        <div class="tab-pane active" id="brgy_directory">
+                      <div class="tab-pane active" id="brgy_directory">
                           <hr class="my-1 bg-white">  
                             <div class="title text-left">
                               <div class="row">
@@ -123,31 +123,19 @@
                                       <h6 class="font-weight-bold text-white">Hospital Hall Address:	</h6>
                                   </div>
                                   <div class="col-md-6">
-                                      <p class="text-white font-weight-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <h6 class="font-weight-bold text-white">Hospital E-mail Address: </h6>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p class=" font-weight-light text-white"><a href="#send_us_email" class="text-white">test@test.com</a> </p>
+                                      <p class="text-white font-weight-light">Barangay San Isidro Angono, Rizal</p>
                                   </div>
                                   <div class="col-md-6">
                                       <h6 class="font-weight-bold text-white">Hospital Telephone Numbers:</h6>
                                   </div>
                                   <div class="col-md-6">
-                                      <p class=" font-weight-light text-white"></p>
+                                      <p class=" font-weight-light text-white">(02) 8651-2253</p>
                                   </div>
                                   <div class="col-md-6">
-                                      <h6 class="font-weight-bold text-white">INFORMATION:</h6>
+                                      <h6 class="font-weight-bold text-white">HOSPITAL FACEBOOK PAGE:</h6>
                                   </div>
                                   <div class="col-md-6">
-                                      <p class=" font-weight-light text-white">1 23456 7</p>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <h6 class="font-weight-bold text-white">Information: </h6>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p class=" font-weight-light text-white">1 23456 7</p>
+                                      <p class=" font-weight-light text-white">RPHS - Angono</p>
                                   </div>
                                   
                               </div>

@@ -53,7 +53,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Name <span class="text-danger">*</span></label>
-                          <input type="text" class="form-control" name="name" id="name" value="{{Auth::user()->name}}">
+                          <input type="text" class="form-control" name="name" id="name" value="{{Auth::user()->name}}" readonly>
                           <span class="invalid-feedback" role="alert">
                               <strong id="error-name"></strong>
                           </span>
@@ -63,7 +63,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Contact Number <span class="text-danger">*</span></label>
-                          <input type="number" class="form-control" name="contact_number" id="contact_number" value="{{Auth::user()->contact_number}}">
+                          <input type="number" class="form-control" name="contact_number" id="contact_number" value="{{Auth::user()->contact_number}}" readonly>
                           <span class="invalid-feedback" role="alert">
                               <strong id="error-contact_number"></strong>
                           </span>
@@ -73,11 +73,15 @@
                       <div class="col-md-6">
                         <div class="form-group">
                             <label class="bmd-label-floating">Gender <span class="text-danger">*</span></label>
-                                <select name="gender" id="gender" class="form-control select2" style="width: 100%">
-                                   <option value="" disabled selected>Gender</option>
-                                   <option value="MALE" {{Auth::user()->gender == 'MALE' ? 'selected' : '' }}>MALE</option>
-                                   <option value="FEMALE" {{Auth::user()->gender == 'FEMALE' ? 'selected' : '' }}>FEMALE</option>
-                                </select>
+                                @if(Auth()->user()->isRegistered == '0')
+                                    <select name="gender" id="gender" class="form-control select2" style="width: 100%" >
+                                      <option value="" disabled selected>Gender</option>
+                                      <option value="MALE" {{Auth::user()->gender == 'MALE' ? 'selected' : '' }}>MALE</option>
+                                      <option value="FEMALE" {{Auth::user()->gender == 'FEMALE' ? 'selected' : '' }}>FEMALE</option>
+                                    </select>
+                                @else
+                                  <input type="text" class="form-control" value="{{Auth::user()->gender}}" readonly>
+                                @endif
                                 <span class="invalid-feedback" role="alert">
                                     <strong id="error-gender"></strong>
                                 </span>
@@ -87,12 +91,16 @@
                       <div class="col-md-6">
                         <div class="form-group">
                             <label class="bmd-label-floating">Civil Status <span class="text-danger">*</span></label>
-                                <select name="civil_status" id="civil_status" class="form-control select2" style="width: 100%">
-                                    <option value="" disabled selected>Civil Status</option>
-                                    <option value="SINGLE" {{Auth::user()->civil_status == 'SINGLE' ? 'selected' : ''}}>SINGLE</option>
-                                    <option value="MARRIED" {{Auth::user()->civil_status == 'MARRIED' ? 'selected' : ''}}>MARRIED</option>
-                                    <option value="WIDOWED" {{Auth::user()->civil_status == 'WIDOWED' ? 'selected' : ''}}>WIDOWED</option>
-                                </select>
+                                @if(Auth()->user()->isRegistered == '0')
+                                  <select name="civil_status" id="civil_status" class="form-control select2" style="width: 100%">
+                                      <option value="" disabled selected>Civil Status</option>
+                                      <option value="SINGLE" {{Auth::user()->civil_status == 'SINGLE' ? 'selected' : ''}}>SINGLE</option>
+                                      <option value="MARRIED" {{Auth::user()->civil_status == 'MARRIED' ? 'selected' : ''}}>MARRIED</option>
+                                      <option value="WIDOWED" {{Auth::user()->civil_status == 'WIDOWED' ? 'selected' : ''}}>WIDOWED</option>
+                                  </select>
+                                @else
+                                  <input type="text" class="form-control" value="{{Auth::user()->civil_status}}" readonly>
+                                @endif
                                 <span class="invalid-feedback" role="alert">
                                     <strong id="error-civil_status"></strong>
                                 </span>
@@ -102,7 +110,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Address <span class="text-danger">*</span></label>
-                          <input type="text" class="form-control" name="address" id="address" value="{{Auth::user()->address}}">
+                          <input type="text" class="form-control" name="address" id="address" value="{{Auth::user()->address}}" {{Auth()->user()->isRegistered == '1' ? 'readonly':''}}>
                           <span class="invalid-feedback" role="alert">
                               <strong id="error-address"></strong>
                           </span>
@@ -113,7 +121,7 @@
                       <div class="form-group">
                           <label >Date Of Birth <span class="text-danger">*</span></label>
 
-                          <input type="date" id="birth_date" name="birth_date" class="form-control" min="01-jan-2022"  value="{{Auth::user()->birth_date}}">
+                          <input type="date" id="birth_date" name="birth_date" class="form-control" min="01-jan-2022"  value="{{Auth::user()->birth_date}}" {{Auth()->user()->isRegistered == '1' ? 'readonly':''}}>
                           <span class="invalid-feedback" role="alert">
                               <strong id="error-birth_date"></strong>
                           </span>

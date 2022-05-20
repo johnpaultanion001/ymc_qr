@@ -33,12 +33,6 @@ class UserController extends Controller
             ]);
         }else{
             $validated =  Validator::make($request->all(), [
-                'name' => ['required', 'string', 'max:255'],
-                'birth_date' => ['required', 'date' , 'before:today'],
-                'contact_number' => ['required', 'string', 'min:8','max:11'],
-                'civil_status' => ['required'],
-                'gender' => ['required'],
-                'address' => ['required'],
                 'id_picture' =>  ['mimes:png,jpg,jpeg,svg,bmp,ico', 'max:2040'],
             ]);
         }
@@ -64,20 +58,27 @@ class UserController extends Controller
             }
            
         }
+        if(Auth()->user()->isRegistered == 0){
+            $dob = $request->input('birth_date');
+            $age = Carbon::parse($dob)->diff(Carbon::now())->format('%y years old');
+            User::find($user->id)->update([
+                'name' => $request->input('name'),
+                'birth_date' => $request->input('birth_date'),
+                'contact_number' => $request->input('contact_number'),
+                'civil_status' => $request->input('civil_status'),
+                'gender' => $request->input('gender'),
+                'address' => $request->input('address'),
+                'age'      => $age,
+                'id_picture' => $file_name_to_save,
+                'isRegistered' => true,
+            ]);
+        }else{
+            User::find($user->id)->update([
+                'id_picture' => $file_name_to_save,
+                'isRegistered' => true,
+            ]);
+        }
     
-        $dob = $request->input('birth_date');
-        $age = Carbon::parse($dob)->diff(Carbon::now())->format('%y years old');
-        User::find($user->id)->update([
-            'name' => $request->input('name'),
-            'birth_date' => $request->input('birth_date'),
-            'contact_number' => $request->input('contact_number'),
-            'civil_status' => $request->input('civil_status'),
-            'gender' => $request->input('gender'),
-            'address' => $request->input('address'),
-            'age'      => $age,
-            'id_picture' => $file_name_to_save,
-            'isRegistered' => true,
-        ]);
 
         return response()->json(['success' => 'Updated Successfully.']);
     }

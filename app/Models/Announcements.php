@@ -16,7 +16,6 @@ class Announcements extends Model
         'body',
         'link_website',
         'isRemove',
-      
     ];
 
     public function user()

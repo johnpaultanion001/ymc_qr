@@ -10,7 +10,12 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = [
+        'category',
         'name',
-        'slots',
     ];
+
+    public function doctors()
+    {
+        return $this->hasMany(Doctor::class, 'service_id' , 'id');
+    }
 }

@@ -58,8 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function brgy_certificate()
+    public function doctor()
     {
-        return $this->hasMany(BrgyCertificate::class, 'user_id', 'id');
+        return $this->belongsTo(Doctor::class, 'id', 'user_id');
     }
+   
 }

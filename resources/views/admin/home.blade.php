@@ -64,11 +64,19 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 mx-auto">
+                        <div class="col-6">
                             <a href="/admin/appointment">
                                 <div class="card card-block text-info  border-right-0 border-top-o border-bottom-0 bg-white btn" style="border: 1px solid #111">
                                     <h3 style="color: #111;">{{$completed}}</h3>
                                     <span class="small text-uppercase font-weight-bold" style="color: #111;">COMPLETED</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="/admin/appointment">
+                                <div class="card card-block text-info  border-right-0 border-top-o border-bottom-0 bg-white btn" style="border: 1px solid #111">
+                                    <h3 style="color: #111;">{{$failed}}</h3>
+                                    <span class="small text-uppercase font-weight-bold" style="color: #111;">FAILED</span>
                                 </div>
                             </a>
                         </div>
@@ -94,7 +102,26 @@
                             </div>
                         </div>
                 </div>
+                <div class="card text-center" style="background-color: #667db6;">
+                    
+                        <div class="card-block">
+                            <h4 class="card-title text-white">DOCTORS</h4>
+                            <h2><i class="fas fa-users fa-3x text-white"></i></h2>
+                        </div>
+                        
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <a href="/admin/doctors">
+                                    <div class="card card-block text-info  border-left-0 border-top-o border-bottom-0 bg-white btn" style="border: 1px solid #111;">
+                                        <h3 style="color: #111;">{{$doctors}}</h3>
+                                        <span class="small text-uppercase font-weight-bold" style="color: #111;">DOCTORS TOTAL</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                </div>
             </div>
+            
             <div class="col-12">
                 <div class="card">
                     <div class="card-header border-0" style="background-color: #667db6;">

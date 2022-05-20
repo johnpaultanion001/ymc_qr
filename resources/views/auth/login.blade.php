@@ -32,11 +32,11 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">mail</i>
+                      <i class="fas fa-user fa-lg"></i>
                     </span>
                   </div>
-                  <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email..." value="{{ old('email') }}" required autocomplete="email" autofocus>
-                    @error('email')
+                  <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Email Or Phone Number" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                    @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -48,7 +48,7 @@
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password...">
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
                   <span toggle="#current_password-field" class="fa fa-fw fa-eye field_icon toggle-current_password" style="float: right; margin-left: -25px; margin-top: 10px; position: relative; z-index: 2;"></span>   
                   @error('password')
                         <span class="invalid-feedback" role="alert">

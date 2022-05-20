@@ -32,6 +32,7 @@
                   <option value="PENDING">PENDING</option>
                   <option value="APPROVED">APPROVED</option>
                   <option value="DECLINED">DECLINED</option>
+                  <option value="FAILED">FAILED</option>
                   <option value="FOLLOW-UP">FOLLOW-UP</option>
                   <option value="COMPLETED">COMPLETED</option>
               </select>
@@ -41,11 +42,12 @@
         </div>
         <div class="table-responsive">
           <!-- Projects table -->
-          <table class="table align-items-center table-flush datatable-brgy display" cellspacing="0" width="100%">
+          <table id="datatable-apps" class="table align-items-center table-flush display" cellspacing="0" width="100%">
             <thead class="thead-light">
               <tr>
+               
                 <th scope="col">Actions</th>
-                <th scope="col">Patient ID</th>
+                <th scope="col">Appointment ID</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Contact Number</th>
@@ -53,6 +55,7 @@
                 <th scope="col">Ref Number</th>
 
                 <th scope="col">Service</th>
+                <th scope="col">Doctor</th>
                 <th scope="col">Appointment Date</th>
                 <th scope="col">Appointment Time</th>
                 <th scope="col">Status</th>
@@ -63,7 +66,8 @@
             </thead>
             <tbody class="text-uppercase font-weight-bold">
               @foreach($appointments as $appointments)
-                    <tr>
+                    <tr data-entry-id="{{ $appointments->id ?? '' }}">
+                    
                       <td>
                           <button type="button" name="change" change="{{  $appointments->id ?? '' }}"  class="change  btn btn-sm  btn-primary text-uppercase">Change Status</button>
                           <button type="button" name="remove" remove="{{  $appointments->id ?? '' }}" class="remove btn btn-sm  btn-danger text-uppercase">Remove</button>
@@ -92,6 +96,9 @@
                             {{  $appointments->service->name ?? '' }}
                       </td>
                       <td>
+                           {{  $appointments->doctor->name ?? '' }}
+                      </td>
+                      <td>
                             {{  $appointments->date ?? '' }}
                       </td>
                       <td>
@@ -109,6 +116,8 @@
                                 <h1 class="btn-sm btn btn-primary text-uppercase">Follow-Up</h1>
                             @elseif ($appointments->status == 'COMPLETED')
                                 <h1 class="btn-sm btn btn-success text-uppercase">Completed</h1>
+                            @elseif ($appointments->status == 'FAILED')
+                                <h1 class="btn-sm btn btn-danger text-uppercase">Failed</h1>
                             @endif
                       </td>
                       <td>
@@ -144,18 +153,29 @@
             </button>
           </div>
           <div class="modal-body">
-                    <div class="form-group">
-                      <label for="status" class="bmd-label-floating">Status</label>
-                      <select name="status" id="status" class="form-control select2">
-                              <option value="" disabled selected>Select Status</option>
-                              <option value="PENDING">PENDING</option>
-                              <option value="APPROVED">APPROVED</option>
-                              <option value="DECLINED">DECLINED</option>
-                              <option value="FOLLOW-UP">FOLLOW-UP</option>
-                              <option value="COMPLETED">COMPLETED</option>
-                      </select>
-                    </div>
-                  
+                <div class="form-group">
+                  <label for="status" class="bmd-label-floating">Status</label>
+                  <select name="status" id="status" class="form-control select2">
+                          <option value="" disabled selected>Select Status</option>
+                          <option value="PENDING">PENDING</option>
+                          <option value="APPROVED">APPROVED</option>
+                          <option value="DECLINED">DECLINED</option>
+                          <option value="FAILED">FAILED</option>
+                          <option value="FOLLOW-UP">FOLLOW-UP</option>
+                          <option value="COMPLETED">COMPLETED</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="doctor" class="bmd-label-floating">Doctor</label>
+                  <p class="text-warning" id="current_selected_doctor"></p>
+                  <select name="doctor" id="doctor" class="form-control select2">
+                          <option value="" disabled selected>Select Doctor</option>
+                  </select>
+
+                  <span class="invalid-feedback" role="alert">
+                      <strong id="error-doctor"></strong>
+                  </span>
+                </div>
                 <div class="form-group">
                   <label for="comment" id="lblpurpose" class="bmd-label-floating">Comment:</label>
                   <textarea class="form-control comment" rows="4" name="comment" id="comment"></textarea>
@@ -189,22 +209,90 @@
   $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 
+
     $.extend(true, $.fn.dataTable.defaults, {
-      pageLength: 100,
+    pageLength: 100,
       'columnDefs': [{ 'orderable': false, 'targets': 0 }],
     });
 
-    var table = $('.datatable-brgy:not(.ajaxTable)').DataTable({ buttons: dtButtons });
+
+    var table = $('#datatable-apps:not(.ajaxTable)').DataTable({ buttons: dtButtons });
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();
     });
 
     $('#status_dd').on('change', function () {
-      table.columns(10).search( this.value ).draw();
+      table.columns(11).search( this.value ).draw();
     });
 
   });
+
+//   $(document).on('click', '#move', function () {
+//         var table = $('#datatable-apps').DataTable();
+//         var ids = $.map(table.rows({ selected: true }).nodes(), function (entry) {
+//             return $(entry).data('entry-id')
+//         });
+//         var _token =  $('input[name="_token"]').val();
+
+
+//         if (ids.length === 0) {
+//           alert('NO ROW SELECTED')
+//         }else{
+//           $.confirm({
+//                 title: 'Confirmation',
+//                 content: 'You want to move this data to Historical data?',
+//                 type: 'green',
+//                 buttons: {
+//                 confirm: {
+//                 text: 'confirm',
+//                 btnClass: 'btn-blue',
+//                 keys: ['enter', 'shift'],
+//                 action: function(){
+//                     return $.ajax({
+//                         url:"/admin/historical/move",
+//                         method:'GET',
+//                         data: {
+//                           ids:ids,_token:_token,
+//                         },
+//                         dataType:"json",
+//                         beforeSend:function(){
+                        
+//                         },
+//                         success:function(data){
+//                             if(data.success){
+//                             $.confirm({
+//                                 title: 'Confirmation',
+//                                 content: data.success,
+//                                 type: 'green',
+//                                 buttons: {
+//                                         confirm: {
+//                                             text: 'confirm',
+//                                             btnClass: 'btn-blue',
+//                                             keys: ['enter', 'shift'],
+//                                             action: function(){
+//                                                 location.reload();
+//                                             }
+//                                         },
+                                        
+//                                     }
+//                                 });
+//                             }
+//                         }
+//                     })
+//                 }
+//                 },
+//                 cancel:  {
+//                 text: 'cancel',
+//                 btnClass: 'btn-red',
+//                 keys: ['enter', 'shift'],
+//                 }
+//                 }
+//                 });
+//         }
+     
+// });
+
 
   $(document).on('click', '.change', function(){
       $('#formModal').modal('show');
@@ -217,6 +305,9 @@
 
       var id = $(this).attr('change');
       $('#hidden_id').val(id);
+      available_doctor();
+      $('#current_selected_doctor').text(null);
+  
 
       $.ajax({
           url :"/admin/appointment/"+id,
@@ -226,6 +317,7 @@
               $("#action_button").attr("value", "Loading..");
           },
           success:function(data){
+            
               if($('#action').val() == 'Edit'){
                   $("#action_button").attr("disabled", false);
                   $("#action_button").attr("value", "Update");
@@ -236,20 +328,52 @@
               $.each(data.result, function(key,value){
                 if(key == $('#'+key).attr('id')){
                     $('#'+key).val(value)
+
                     if(key == 'status'){
-                        $("#status").select2("trigger", "select", {
-                            data: { id: value }
-                        });
+                          $("#status").select2("trigger", "select", {
+                              data: { id: value }
+                          });
                     }
+
                     
                 }
+                if(key == 'doctor_id'){
+                    $("#doctor").val(value);
+                }
+                
               })
-              
+
               $('#action_button').val('Update');
               $('#action').val('Edit');
+              
+              
           }
       })
   });
+
+  function available_doctor(){
+      var id = $('#hidden_id').val();
+      $.ajax({
+          url: "/admin/doctor/appointment/available", 
+          type: "get",
+          dataType:"json",
+          data: {
+              id:id,_token: '{!! csrf_token() !!}',
+          },
+          beforeSend: function() {
+          },
+          success: function(data){
+                var doctors = '';
+                doctors += '<option value="">Select Doctor</option>';
+                $.each(data.doctors, function(key,value){
+                    doctors += '<option value="'+value.id+'">'+value.name+'</option>';
+                });
+                $('#doctor').empty().append(doctors);
+              
+              
+          },
+      });
+  }
 
   $('#myForm').on('submit', function(event){
     event.preventDefault();
@@ -315,64 +439,65 @@
         
         }
     });
-});
-
-
-$(document).on('click', '.remove', function(){
-  var id = $(this).attr('remove');
-  $.confirm({
-      title: 'Confirmation',
-      content: 'You really want to remove this record?',
-      autoClose: 'cancel|10000',
-      type: 'red',
-      buttons: {
-          confirm: {
-              text: 'confirm',
-              btnClass: 'btn-blue',
-              keys: ['enter', 'shift'],
-              action: function(){
-                  return $.ajax({
-                      url:"appointment/"+id,
-                      method:'DELETE',
-                      data: {
-                          _token: '{!! csrf_token() !!}',
-                      },
-                      dataType:"json",
-                      beforeSend:function(){
-                        $('#titletable').text('Loading...');
-                      },
-                      success:function(data){
-                          if(data.success){
-                            $.confirm({
-                              title: 'Confirmation',
-                              content: data.success,
-                              type: 'green',
-                              buttons: {
-                                      confirm: {
-                                          text: 'confirm',
-                                          btnClass: 'btn-blue',
-                                          keys: ['enter', 'shift'],
-                                          action: function(){
-                                              location.reload();
-                                          }
-                                      },
-                                      
-                                  }
-                              });
-                          }
-                      }
-                  })
-              }
-          },
-          cancel:  {
-              text: 'cancel',
-              btnClass: 'btn-red',
-              keys: ['enter', 'shift'],
-          }
-      }
   });
 
-});
+  $(document).on('click', '.remove', function(){
+    var id = $(this).attr('remove');
+    $.confirm({
+        title: 'Confirmation',
+        content: 'You really want to remove this record?',
+        autoClose: 'cancel|10000',
+        type: 'red',
+        buttons: {
+            confirm: {
+                text: 'confirm',
+                btnClass: 'btn-blue',
+                keys: ['enter', 'shift'],
+                action: function(){
+                    return $.ajax({
+                        url:"appointment/"+id,
+                        method:'DELETE',
+                        data: {
+                            _token: '{!! csrf_token() !!}',
+                        },
+                        dataType:"json",
+                        beforeSend:function(){
+                          $('#titletable').text('Loading...');
+                        },
+                        success:function(data){
+                            if(data.success){
+                              $.confirm({
+                                title: 'Confirmation',
+                                content: data.success,
+                                type: 'green',
+                                buttons: {
+                                        confirm: {
+                                            text: 'confirm',
+                                            btnClass: 'btn-blue',
+                                            keys: ['enter', 'shift'],
+                                            action: function(){
+                                                location.reload();
+                                            }
+                                        },
+                                        
+                                    }
+                                });
+                            }
+                        }
+                    })
+                }
+            },
+            cancel:  {
+                text: 'cancel',
+                btnClass: 'btn-red',
+                keys: ['enter', 'shift'],
+            }
+        }
+    });
+
+  });
+
+
 
 
 </script>

@@ -17,6 +17,7 @@ class CreateAppointmentsTable extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('service_id');
+            $table->string('doctor_id')->nullable();;
             $table->string('ref_number');
             $table->longText('note')->nullable();
 
@@ -25,6 +26,7 @@ class CreateAppointmentsTable extends Migration
 
             $table->date('date');
             $table->string('time');
+            $table->string('isMove')->default(0);
 
             $table->timestamps();
         });

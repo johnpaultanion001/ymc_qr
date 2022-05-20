@@ -41,25 +41,29 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-
-         $this->clearLoginAttempts($request);
-
-         if ($response = $this->authenticated($request, $this->guard()->user())) {
-             return $response;
-      }
-
-        
-         if(Auth::user()->role == 'patient'){
-             $redirectTo = '/patient/home';
-         }else if(Auth::user()->role == 'admin'){
-             $redirectTo = '/admin/home';
-         }
-
-         return $request->wantsJson()
-                     ? new JsonResponse([], 204)
-                     : redirect($redirectTo);
-     }
+    public function login(Request $request)
+    {   
+        $input = $request->all();
+  
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+  
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'contact_number';
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        {
+            if(Auth::user()->role == 'patient'){
+                return redirect()->route('patient.home');  
+            }else if(Auth::user()->role == 'admin'){
+                return redirect()->route('admin.home');  
+            }else if(Auth::user()->role == 'doctor'){
+                return redirect()->route('admin.doctor.appointment');  
+            }
+        }else{
+            return redirect()->route('login')
+                ->with('error_login','Email-Address And Password Are Wrong.');
+        }
+          
+    }
 }

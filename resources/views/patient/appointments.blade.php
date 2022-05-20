@@ -22,9 +22,20 @@
           <div class="col-md-12 text-center">
               <h2 class="text-center title text-white">Manage Appointments</h2>
           </div>
+         
           <div class="col-md-12 text-right">
-            <button class="btn btn-success" id="btn_print_modal" >Print Appointments</button>
-            <button class="btn btn-primary btn-raised" name="create_record" id="create_record" >Add Appointment</button>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      ADD APPOINTMENT
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item create_record" href="#" category="MEDICAL SERVICES">MEDICAL SERVICES</a>
+                      <a class="dropdown-item create_record" href="#" category="LABORATORY TEST">LABORATORY TESTS</a>
+                      <a class="dropdown-item" id="btn_print_modal"  href="#">PRINT APPOINTMENT</a>
+                      
+                    </div>
+                </div>
+          
           </div>
 
           <div class="col-md-12">
@@ -38,6 +49,11 @@
                               <h6 class="card-subtitle mb-2 text-dark">{{ \Carbon\Carbon::parse($appointment->date)->isoFormat('MMM Do YYYY')}} at {{$appointment->time}}</h6>
                               <p class="card-text">{{$appointment->note}}</p>
                                 <div class="row">
+                                  <div class="col-sm-12">
+                                    <h6 class="card-subtitle mb-2 text-dark">Assigned Doctor:</h6>
+                                      <p class="badge badge-success">{{$appointment->doctor->name ?? 'N/A'}}</p>
+                                  
+                                  </div>
                                   <div class="col-sm-6">
                                     <h6 class="card-subtitle mb-2 text-dark">REF #:</h6>
                                     <p class="badge badge-dark">{{$appointment->ref_number}}</p>
@@ -59,6 +75,9 @@
                                     @elseif ($appointment->status == 'COMPLETED')
                                       <h6 class="card-subtitle mb-2 text-dark">STATUS:</h6>
                                       <p class="badge badge-success">Completed</p>
+                                    @elseif ($appointment->status == 'FAILED')
+                                      <h6 class="card-subtitle mb-2 text-dark">STATUS:</h6>
+                                      <p class="badge badge-danger">Failed</p>
                                     @endif
                                   </div>
 
@@ -66,6 +85,8 @@
                                   @if($appointment->status == 'PENDING')
                                     <button type="button" name="edit" edit="{{  $appointment->id ?? '' }}"  class="edit btn btn-sm btn-primary">Edit Info.</button>
                                     <button type="button" name="cancel" cancel="{{  $appointment->id ?? '' }}"  class="cancel btn btn-sm btn-danger">Cancel</button>
+                                  @elseif($appointment->status == 'APPROVED')
+                                  <button type="button" name="cancel" cancel="{{  $appointment->id ?? '' }}"  class="cancel btn btn-sm btn-danger">Cancel</button>
                                   @else
                                     <br>
                                       <h6 class="card-subtitle mb-2 text-muted">Admin Comment:</h6>
@@ -178,6 +199,8 @@
                           </span>
                         </div>
                       </div>
+
+                      
                     </div>
                   
 
@@ -200,7 +223,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">PRINT APPOINTMENTS</h5>
+          <h5>PRINT APPOINTMENTS</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="material-icons">clear</i>
           </button>
@@ -215,6 +238,7 @@
                 <th>Service</th>
                 <th>Ref #</th>
                 <th>Date/Time</th>
+                <th>Assigned Doctor</th>
                 <th>Status</th>
                 <th>Created At</th>
               
@@ -224,16 +248,19 @@
                 @forelse($appointments as $appointment)
                 <tr>
                   <td>
-                    {{$appointment->service->name}}
+                    {{$appointment->service->name ?? ''}}
                   </td>
                   <td>
-                    {{$appointment->ref_number}}
+                    {{$appointment->ref_number ?? ''}}
                   </td>
                   <td>
-                    {{ \Carbon\Carbon::parse($appointment->date)->isoFormat('MMM Do YYYY')}} at {{$appointment->time}}
+                    {{ \Carbon\Carbon::parse($appointment->date ?? '')->isoFormat('MMM Do YYYY')}} at {{$appointment->time ?? ''}}
                   </td>
                   <td>
-                    {{$appointment->status}}
+                    {{$appointment->doctor->name ?? ''}}
+                  </td>
+                  <td>
+                    {{$appointment->status ?? ''}}
                   </td>
                   <td>
                     {{ $appointment->created_at->format('M j , Y h:i A') }}
@@ -278,7 +305,10 @@
 <script> 
 
 
-  $(document).on('click', '#create_record', function(){
+var category = null;
+  $(document).on('click', '.create_record', function(){
+      category = $(this).attr('category');
+      category_services(category);
       $('#formModal').modal('show');
       $('#myForm')[0].reset();
       $('.form-control').removeClass('is-invalid')
@@ -287,6 +317,29 @@
       $('#action').val('Add');
       $('#lblpurpose').addClass('bmd-label-floating')
   });
+
+  function category_services(category){
+      $.ajax({
+          url: "/patient/appointment/category/services", 
+          type: "get",
+          dataType:"json",
+          data: {
+            category:category,_token: '{!! csrf_token() !!}',
+          },
+          beforeSend: function() {
+          },
+          success: function(data){
+                var services = '';
+                services += '<option value="" disabled selected>Services</option>';
+                $.each(data.services, function(key,value){
+                    services += '<option value="'+value.id+'">'+value.name+'</option>';
+                });
+                $('#service_id').empty().append(services);
+              
+              
+          },
+      });
+  }
 
   $(document).on('click', '#btn_print_modal', function(){
       $('#printModal').modal('show');
@@ -325,9 +378,36 @@
           },
           success: function(response){
               $("#date_time").html(response);
+              validation_of_date_time()
           }	
       })
   });
+
+  function validation_of_date_time(){
+    var service = $('#service_id').val();
+    var time1 = $('#time').val();
+    var date1 = $('#date').val();
+
+      $.ajax({
+          url: "/patient/appointment/validation_of_date_time/validation", 
+          type: "get",
+          dataType:"json",
+          data: {
+              service:service,time:time1,date:date1,_token: '{!! csrf_token() !!}',
+          },
+          beforeSend: function() {
+          },
+          success: function(data){
+              if(data.onemin){
+                $('#date').addClass('is-invalid')
+                $('#error-date').text(data.onemin)
+              }
+             
+               
+          },
+      });
+  }
+
 
   $('#myForm').on('submit', function(event){
     event.preventDefault();
@@ -369,8 +449,8 @@
                 })
             }
             if(data.onepending){
-                $.confirm({
-                    title: 'Warning',
+              $.confirm({
+                    title: 'Error Message',
                     content: data.onepending,
                     type: 'red',
                     buttons: {
@@ -379,7 +459,6 @@
                                 btnClass: 'btn-blue',
                                 keys: ['enter', 'shift'],
                                 action: function(){
-                                  $('#formModal').modal('hide');
                                 }
                             },
                             
@@ -387,40 +466,16 @@
                     });
             }
             if(data.onemin){
-                $.confirm({
-                  title: 'Warning',
-                  content: data.onemin,
-                  type: 'red',
-                  buttons: {
-                        confirm: {
-                            text: 'confirm',
-                            btnClass: 'btn-blue',
-                            keys: ['enter', 'shift'],
-                            action: function(){
-                              $('#formModal').modal('show');
-                            }
-                        },
-                        
-                    }
-                });
+                $('#date').addClass('is-invalid')
+                $('#error-date').text(data.onemin)
             }
-            if(data.maxslots){
-                $.confirm({
-                  title: 'Warning',
-                  content: data.maxslots,
-                  type: 'red',
-                  buttons: {
-                        confirm: {
-                            text: 'confirm',
-                            btnClass: 'btn-blue',
-                            keys: ['enter', 'shift'],
-                            action: function(){
-                              $('#formModal').modal('show');
-                            }
-                        },
-                        
-                    }
-                });
+            if(data.date){
+                  $('#date').addClass('is-invalid')
+                  $('#error-date').text(data.date)
+            }
+            if(data.time){
+                  $('#time').addClass('is-invalid')
+                  $('#error-time').text(data.time)
             }
             if(data.success){
                 $('.form-control').removeClass('is-invalid')
@@ -544,5 +599,9 @@
     });
 
   });
+
+
+
+
 </script>
 @endsection

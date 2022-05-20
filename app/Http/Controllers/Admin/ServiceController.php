@@ -26,7 +26,7 @@ class ServiceController extends Controller
         date_default_timezone_set('Asia/Manila');
         $validated =  Validator::make($request->all(), [
             'name' => ['required', 'string' , 'unique:services'],
-            'slots' => ['required', 'numeric', 'min:1']
+            'category' => ['required'],
         ]);
 
         if ($validated->fails()) {
@@ -35,7 +35,7 @@ class ServiceController extends Controller
 
         Service::create([
             'name' => $request->input('name'),
-            'slots' => $request->input('slots'),
+            'category' => $request->input('category'),
         ]);
 
         return response()->json(['success' => 'Added Successfully.']);
@@ -53,7 +53,7 @@ class ServiceController extends Controller
         date_default_timezone_set('Asia/Manila');
         $validated =  Validator::make($request->all(), [
             'name' => ['required', 'string'],
-            'slots' => ['required', 'numeric', 'min:1']
+            'category' => ['required'],
         ]);
 
         if ($validated->fails()) {
@@ -62,7 +62,7 @@ class ServiceController extends Controller
 
         Service::find($service->id)->update([
             'name' => $request->input('name'),
-            'slots' => $request->input('slots'),
+            'category' => $request->input('category'),
         ]);
 
         return response()->json(['success' => 'Updated Successfully.']);
@@ -83,39 +83,43 @@ class ServiceController extends Controller
             $days = [0,1,2,3,5,6];
             $times = [13,14,15];
         }
-        if($service == 2){
+        elseif($service == 2){
             $days = [0,6];
             $times = [8,9,10,11,12,13,14];
         }
-        if($service == 3){
+        elseif($service == 3){
             $days = [0,6];
             $times = [9,10,11];
         }
-        if($service == 4){
+        elseif($service == 4){
             $days = [0,1,2,5,6];
             $times = [12,13,14];
         }
-        if($service == 5){
+        elseif($service == 5){
             $days = [0,6];
             $times = [13,14,15];
         }
-        if($service == 6){
+        elseif($service == 6){
             $days = [0,1,6];
             $times = [8,9,10,11,12,13,14,15,16];
         }
-        if($service == 7){
+        elseif($service == 7){
             $days = [0,6];
             $times = [8,9,10,11,12,13,14,15,16];
         }
-        if($service == 8){
+        elseif($service == 8){
             $days = [0,1,2,4,5,6];
             $times = [8,9,10,11];
         }
-        if($service == 9){
+        elseif($service == 9){
             $days = [0,6];
             $times = [8,9,10,11,12,13,14,15,16];
         }
-        if($service == 10){
+        elseif($service == 10){
+            $days = [];
+            $times = [8,9,10,11,12,13,14,15,16];
+        }
+        else{
             $days = [];
             $times = [8,9,10,11,12,13,14,15,16];
         }
