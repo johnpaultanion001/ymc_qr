@@ -19229,7 +19229,7 @@ footer .pull-center {
     transform: scale(1.1);
   }
   .postcard:nth-child(2n+1) {
-    flex-direction: row;
+   flex-direction: row-reverse;;
   }
   .postcard:nth-child(2n+0) {
     flex-direction: row-reverse;

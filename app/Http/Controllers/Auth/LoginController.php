@@ -53,13 +53,7 @@ class LoginController extends Controller
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'contact_number';
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
         {
-            if(Auth::user()->role == 'patient'){
-                return redirect()->route('patient.home');  
-            }else if(Auth::user()->role == 'admin'){
-                return redirect()->route('admin.home');  
-            }else if(Auth::user()->role == 'doctor'){
-                return redirect()->route('admin.doctor.appointment');  
-            }
+            return redirect()->route('admin.home');  
         }else{
             return redirect()->route('login')
                 ->with('error_login','You have entered an invalid username or password.');

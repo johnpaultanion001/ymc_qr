@@ -26283,10 +26283,7 @@ table.dataTable tbody > tr.selected
     font-weight: 400;
 }
 
-.fc-header-toolbar
-{
-    display: none;
-}
+
 
 .fc-scroller
 {
@@ -26357,6 +26354,7 @@ table.dataTable tbody > tr.selected
     padding: 2px 6px;
 
     background: rgba(0, 0, 0, .2);
+    display: none;
 }
 
 .fc-view,

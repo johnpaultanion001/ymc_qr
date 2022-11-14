@@ -1,13 +1,8 @@
 <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
       <div class="container">
         <div class="navbar-translate">
-         <a href="/">
-         
-            <img src="{{ asset('/assets/img/logo.jpg') }}" width="80" alt="logo" style="border-radius: 40px;"> 
-            <a class="font-weight-bold navbar-brand ml-2" href="/">
-              {{ trans('panel.site_title') }}
-            </a>
-            
+          <a href="/">
+            <img src="{{ asset('/assets/img/logo.png') }}" width="80" alt="logo" style="border-radius: 40px;"> 
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -27,37 +22,20 @@
               </a>
             </li>
 
-           
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <i class="material-icons">apps</i> Services
+            <li class="nav-item">
+              <a class="nav-link" href="/events">
+              <i class="fas fa-address-card fa-lg p-2"></i> Events
               </a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="/patient/appointment" class="dropdown-item">
-                  <i class="far fa-calendar-plus fa-lg p-2"></i> Appointment
-                </a>
-                <a href="/admin/patients/finder/doctor" class="dropdown-item">
-                  <i class="fas fa-search fa-lg p-2"></i> Finder Doctor
-                </a>
-              </div>
-              
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/#about" onclick="scrollToAbout()">
+              <i class="fas fa-address-card fa-lg p-2"></i> ABOUT YMC
+              </a>
+            </li>
+
 
             
-
-            <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link " data-toggle="dropdown">
-                <i class="fas fa-address-card fa-lg p-2"></i> About Us
-              </a>
-              <div class="dropdown-menu dropdown-with-icons">
-                <a href="/#about" class="dropdown-item" onclick="scrollToAbout()">
-                  <i class="far fa-calendar-plus fa-lg p-2"></i> ABOUT HOSPITAL
-                </a>
-                <a href="/#news" class="dropdown-item" onclick="scrollToNews()">
-                  <i class="far fa-envelope fa-lg p-2"></i> NEWS
-                </a> 
-              </div>
-            </li>
 
             
             <li class="nav-item">
@@ -115,6 +93,4 @@
       </div>
   </nav>
   <div class="page-header header-filter clear-filter purple-filter"></div>
-
-
   

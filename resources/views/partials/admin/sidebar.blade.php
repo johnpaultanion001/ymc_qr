@@ -4,7 +4,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="{{ route("admin.home") }}">
-          <img src="{{URL::asset('/assets/img/logo.jpg')}}" width="90px"   alt="LOGO"> 
+          <img src="{{ asset('/assets/img/logo.png') }}" width="80" alt="logo" style="border-radius: 40px;"> 
         </a>
       </div>
       <div class="navbar-inner">
@@ -21,74 +21,37 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/patient_list') || request()->is('admin/patient_list/*') ? 'active' : '' }}" href="{{ route("admin.patient") }}">
+                <a class="nav-link {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'active' : '' }}" href="{{ route("admin.students.index") }}">
                 <i class="fas fa-users fa-lg "></i>
-                  <span class="nav-link-text text-uppercase">Patient List</span>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/appointment') || request()->is('admin/appointment/*') ? 'active' : '' }}" href="{{ route("admin.appointment.index") }}">
-                  <i class="far fa-list-alt fa-lg "></i>
-                  <span class="nav-link-text text-uppercase">Manage Appointment</span>
+                  <span class="nav-link-text text-uppercase">Student List</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/services') || request()->is('admin/services/*') ? 'active' : '' }}" href="{{ route("admin.services.index") }}">
-                  <i class="far fa-list-alt fa-lg "></i>
-                  <span class="nav-link-text text-uppercase">Manage Services</span>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/announcements') || request()->is('admin/announcements/*') ? 'active' : '' }}" href="{{ route("admin.announcements.index") }}">
-                  <i class="far fa-list-alt fa-lg "></i>
-                  <span class="nav-link-text text-uppercase">Manage Announcements</span>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/doctors') || request()->is('admin/doctors/*') ? 'active' : '' }}" href="{{ route("admin.doctors.index") }}">
-                  <i class="far fa-list-alt fa-lg "></i>
-                  <span class="nav-link-text text-uppercase">Manage Doctors Account</span>
+                <a class="nav-link {{ request()->is('admin/patient_list') || request()->is('admin/patient_list/*') ? 'active' : '' }}"  href="{{ route("admin.students.index") }}">
+                <i class="fas fa-users fa-lg "></i>
+                  <span class="nav-link-text text-uppercase">Trainor List</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{  request()->is('admin/historical/filter/*') ? 'active' : '' }}" href="/admin/historical/filter/all">
-                  <i class="far fa-list-alt fa-lg "></i>
-                  <span class="nav-link-text text-uppercase">Historical Data</span>
+                <a class="nav-link {{ request()->is('admin/patient_list') || request()->is('admin/patient_list/*') ? 'active' : '' }}"  href="{{ route("admin.students.index") }}">
+                <i class="fas fa-users fa-lg "></i>
+                  <span class="nav-link-text text-uppercase">Animator List</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/activity_log') || request()->is('admin/activity_log/*') ? 'active' : '' }}" href="{{ route("admin.activity_log") }}">
-                  <i class="far fa-list-alt fa-lg "></i>
-                  <span class="nav-link-text text-uppercase">Activity Log</span>
+                <a class="nav-link {{ request()->is('admin/schedule_activities') || request()->is('admin/schedule_activities/*') ? 'active' : '' }}"  href="{{ route("admin.schedule_activities.index") }}">
+                <i class="fas fa-users fa-lg "></i>
+                  <span class="nav-link-text text-uppercase">Schedule & Activities</span>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}" href="{{ route("admin.events.index") }}">
+                  <i class="far fa-list-alt fa-lg "></i>
+                  <span class="nav-link-text text-uppercase">Manage Event</span>
+                </a>
+              </li>
               @endif
-              @if(Auth()->user()->role == 'doctor')
-                <li class="nav-item">
-                  <a class="nav-link {{ request()->is('admin/doctor/account') || request()->is('admin/doctor/account/*') ? 'active' : '' }}" href="{{ route("admin.doctor.account") }}">
-                    <i class="far fa-user fa-lg "></i>
-                    <span class="nav-link-text text-uppercase">Manage Account</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link {{ request()->is('admin/doctor/appointments') || request()->is('admin/doctor/appointments/*') ? 'active' : '' }}" href="{{ route("admin.doctor.appointment") }}">
-                    <i class="far fa-list-alt fa-lg "></i>
-                    <span class="nav-link-text text-uppercase">Manage Appointment</span>
-                  </a>
-                </li>
-              @endif
-              
-
-           
-
-              
           </ul>
-
-
         </div>
 
       </div>

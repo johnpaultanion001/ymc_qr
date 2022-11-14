@@ -5,26 +5,16 @@
               <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                 <li class="breadcrumb-item text-uppercase"><a href="/admin/home")><i class="ni ni-tv-2 mr-2 "></i>Home</a></li>
                 <li class="breadcrumb-item active text-uppercase" aria-current="page">
-                 @if(request()->is('admin/home'))
-                    Home
-                 @elseif(request()->is('admin/appointment'))
-                    Appointments
-                 @elseif(request()->is('admin/announcements'))
-                       Announcements
-                 @elseif(request()->is('admin/patient_list'))
-                      Patients
-                @elseif(request()->is('admin/services'))
-                      Services
-                @elseif(request()->is('admin/doctors'))
-                      Doctors
-                @elseif(request()->is('admin/historical/filter/*'))
-                      Historical Data
-                @elseif(request()->is('admin/activity_log'))
-                      Activity Log  
-                @elseif(request()->is('admin/doctor/account'))
-                      Account
-                @elseif(request()->is('admin/doctor/appointments'))
-                    Appointments
+                @if(request()->is('admin/home'))
+                  Home
+                @elseif(request()->is('admin/patient_list'))
+                    Patients
+                @elseif(request()->is('admin/events'))
+                    Events
+                @elseif(request()->is('admin/students'))
+                    Students
+                @elseif(request()->is('admin/schedule_activities'))
+                  Schedule & Activities
                 @endif
                 
                  
