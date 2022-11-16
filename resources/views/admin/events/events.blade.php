@@ -53,6 +53,7 @@
               @foreach($events as $event)
                     <tr>
                       <td>
+                          <a href="/admin/events/{{  $event->id ?? '' }}"  class="btn btn-sm btn-success text-uppercase">View</a>
                           <button type="button" name="edit" edit="{{  $event->id ?? '' }}"  class="edit  btn btn-sm btn-primary text-uppercase">Edit</button>
                           <button type="button" name="remove" remove="{{  $event->id ?? '' }}" class="remove btn btn-sm btn-danger text-uppercase">Remove</button>
                       </td>

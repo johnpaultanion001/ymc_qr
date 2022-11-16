@@ -79,10 +79,10 @@
                   </a>
                   <div class="dropdown-menu dropdown-with-icons">
                       <a href="/login" class="dropdown-item">
-                          <i class="fas fa-sign-in-alt fa-lg p-2"></i> Login
+                          <i class="fas fa-sign-in-alt fa-lg p-2"></i>Admin Login
                       </a>
                       <a href="/register" class="dropdown-item">
-                      <i class="fas fa-user-plus fa-lg p-2"></i> Register
+                      <i class="fas fa-user-plus fa-lg p-2"></i> Student Registration
                       </a>
                   </div>
               </li>

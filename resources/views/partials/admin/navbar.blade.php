@@ -9,7 +9,7 @@
                   Home
                 @elseif(request()->is('admin/patient_list'))
                     Patients
-                @elseif(request()->is('admin/events'))
+                @elseif(request()->is('admin/events') || request()->is('admin/events/*'))
                     Events
                 @elseif(request()->is('admin/students'))
                     Students

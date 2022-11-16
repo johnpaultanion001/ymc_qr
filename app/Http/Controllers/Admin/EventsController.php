@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Student;
 use App\Models\EventAttendance;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -65,20 +66,27 @@ class EventsController extends Controller
     }
 
     public function attandance(Request $request, $event, $student){
-        
-        EventAttendance::updateOrCreate(
-            [
-                'event_id' => $event,
-                'student_id' => $student,
-            ],
-            [
-                'event_id' => $event,
-                'student_id' => $student,
-                'user_id'   => auth()->user()->id,
-            ]
-        );
+        $stutdet_data = Student::where('id',$student)->where('isRemove', 0)->where('status', 0)->first();
+        if($stutdet_data != null){
+            EventAttendance::updateOrCreate(
+                [
+                    'event_id' => $event, 
+                    'student_id' => $student,
+                ],
+                [
+                    'event_id' => $event,
+                    'student_id' => $student,
+                    'user_id'   => auth()->user()->id,
+                ]
+            );
 
-        return response()->json(['success' => 'Added Successfully.']);
+            return response()->json(['success' => 'Successfully attended.']);
+        }else{
+            return response()->json(['no_data' => 'This qr code  is not approve or not register to this system']);
+        }
+        
+
+        
     }
 
     public function attandance_record(Event $event){

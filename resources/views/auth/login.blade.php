@@ -36,7 +36,7 @@
                     </span>
                   </div>
                   
-                  <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Email Or Phone Number" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                  <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Email" value="{{ old('username') }}" required autocomplete="username" autofocus>
                     @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

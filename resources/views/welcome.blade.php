@@ -29,7 +29,7 @@
               </div>
                 <div class="blockquote undefined text-white pt-2">
                   <p>
-                      A community in which all people achieve their full potential for health and well-being across the lifespan. We work to be trusted by patients, a valued partner in the community, and creators of positive change.
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                   </p>
                 </div>
             
@@ -40,7 +40,7 @@
             </div>
                 <div class="blockquote undefined text-white pt-2">
                   <p>
-                      To deliver patient-centered treatment that is of the highest quality, service, and accessibility.
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                   </p>
                 </div>
             
@@ -56,7 +56,7 @@
                   </div>
                   <br>
                   <p class="text-white text-center" style="font-size: 17px;">
-                        For the previous few decades since its founding, the province of Rizal has not felt the necessity for its own hospital. The towns' closeness to Manila was the primary reason that such a need was never perceived. The construction of the Rizal Provincial Hospital began in 1939 and was made possible in 1941 by virtue of Congressional Act 3114, which was later amended by Act 3168, thanks to the initiative and tireless efforts of the late congressman and then Provincial Governor of Rizal, Honorable Eulogio Rodriguez Sr. In the same year, it released its site to the general public with a small team of dedicated employees. The head of the Bureau of Hospitals, currently known as the Bureau of Medical Service, supervises and directs it, with the chief of the Hospital acting as his authorized agent.
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
 
                     </p>
                 </div>

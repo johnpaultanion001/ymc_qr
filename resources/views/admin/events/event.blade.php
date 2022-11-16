@@ -28,6 +28,7 @@
               </div>
               
             </div>
+            <h4 id="text_warning" class="text-center"></h4>
         </div>
         <input type="hidden" readonly value="{{$event->id}}" id="event_id">
       </div>
@@ -146,7 +147,7 @@
 
                 },
                 success:function(data){
-                    console.log(data.attendances);
+                    
                     var attendances = "";
                     $.each(data.attendances, function(key,value){
                         attendances += `
@@ -193,7 +194,15 @@
 
         },
         success:function(data){
+          if(data.no_data){
+            $('#text_warning').text(data.no_data);
+            $('#text_warning').removeClass('text-success');
+            $('#text_warning').addClass('text-danger');
+          }
           if(data.success){
+            $('#text_warning').text(data.success);
+            $('#text_warning').removeClass('text-danger');
+            $('#text_warning').addClass('text-success');
             attendance_record();
           }
           
