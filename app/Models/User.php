@@ -20,23 +20,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-
-        'birth_date',
-        'age',
         'contact_number',
-        'civil_status',
-        'gender',
-        'address',
-        'id_picture',
-        
         'role',
         'created_at',
         'updated_at',
         'deleted_at',
         'remember_token',
         'email_verified_at',
-
-        'isRegistered',
     ];
 
     /**
@@ -58,9 +48,5 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function doctor()
-    {
-        return $this->belongsTo(Doctor::class, 'id', 'user_id');
-    }
    
 }

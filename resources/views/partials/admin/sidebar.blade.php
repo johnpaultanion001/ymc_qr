@@ -12,7 +12,6 @@
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
           <!-- Nav items -->
           <ul class="navbar-nav">
-            @if(Auth()->user()->role == 'admin')
               <li class="nav-item">
                 <a class="nav-link {{ request()->is('admin/home') || request()->is('admin/home/*') ? 'active' : '' }}" href="{{ route("admin.home") }}">
                   <i class="ni ni-tv-2 fa-lg "></i>
@@ -27,13 +26,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/patient_list') || request()->is('admin/patient_list/*') ? 'active' : '' }}"  href="{{ route("admin.students.index") }}">
+                <a class="nav-link {{ request()->is('admin/trainors') || request()->is('admin/trainors/*') ? 'active' : '' }}"  href="{{ route("admin.account.trainors") }}">
                 <i class="fas fa-users fa-lg "></i>
                   <span class="nav-link-text text-uppercase">Trainor List</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->is('admin/patient_list') || request()->is('admin/patient_list/*') ? 'active' : '' }}"  href="{{ route("admin.students.index") }}">
+                <a class="nav-link {{ request()->is('admin/animators') || request()->is('admin/animators/*') ? 'active' : '' }}"  href="{{ route("admin.account.animators") }}">
                 <i class="fas fa-users fa-lg "></i>
                   <span class="nav-link-text text-uppercase">Animator List</span>
                 </a>
@@ -50,7 +49,6 @@
                   <span class="nav-link-text text-uppercase">Manage Event</span>
                 </a>
               </li>
-              @endif
           </ul>
         </div>
 

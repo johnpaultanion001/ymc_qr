@@ -88,105 +88,105 @@
   </div>
 </div>
 
-<form method="post" id="myForm" class="contact-form">
-    @csrf
-    <div class="modal fade" id="formModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-uppercase">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-          <div class="modal-body">
+    <form method="post" id="myForm" class="contact-form">
+        @csrf
+        <div class="modal fade" id="formModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="title" class="bmd-label-floating">Title <span class="text-danger">*</span></label>
-                            <input type="text" name="title" id="title" class="form-control" />
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-title"></strong>
-                            </span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title" class="bmd-label-floating">Title <span class="text-danger">*</span></label>
+                                <input type="text" name="title" id="title" class="form-control" />
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-title"></strong>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="cetegory" class="bmd-label-floating">Cetegory <span class="text-danger">*</span></label>
-                            <select name="category" id="category" class="form-control">
-                                <option value="">Select Category</option>
-                                <option value="VIGIL">VIGIL</option>
-                                <option value="SPORT FEST">SPORT FEST</option>
-                                <option value="MARIOLOGY">MARIOLOGY</option>
-                            </select>
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-cetegory"></strong>
-                            </span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cetegory" class="bmd-label-floating">Cetegory <span class="text-danger">*</span></label>
+                                <select name="category" id="category" class="form-control">
+                                    <option value="">Select Category</option>
+                                    <option value="VIGIL">VIGIL</option>
+                                    <option value="SPORT FEST">SPORT FEST</option>
+                                    <option value="MARIOLOGY">MARIOLOGY</option>
+                                </select>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-cetegory"></strong>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="date" class="bmd-label-floating">Date <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control date_picker" id="date" name="date"  autocomplete="off">
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-date"></strong>
-                            </span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date" class="bmd-label-floating">Date <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control date_picker" id="date" name="date"  autocomplete="off">
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-date"></strong>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="time" class="bmd-label-floating">Time <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control time_picker" id="time" name="time"  autocomplete="off">
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-time"></strong>
-                            </span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="time" class="bmd-label-floating">Time <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control time_picker" id="time" name="time"  autocomplete="off">
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-time"></strong>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="image" class="bmd-label-floating">Image <span class="text-danger">*</span></label>
-                            <input type="file" name="image" class="form-control image" accept="image/*" />
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-image"></strong>
-                            </span>
-                            <div class="current_img pt-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                    <br>
-                                    <br>
-                                    <br>
-                                        <small>Current Image:</small>
-                                    </div>
-                                    <div class="col-6">
-                                        <img style="vertical-align: bottom;" id="current_image"  height="100" width="100" src="" />
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="image" class="bmd-label-floating">Image <span class="text-danger">*</span></label>
+                                <input type="file" name="image" class="form-control image" accept="image/*" />
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-image"></strong>
+                                </span>
+                                <div class="current_img pt-4">
+                                    <div class="row">
+                                        <div class="col-6">
+                                        <br>
+                                        <br>
+                                        <br>
+                                            <small>Current Image:</small>
+                                        </div>
+                                        <div class="col-6">
+                                            <img style="vertical-align: bottom;" id="current_image"  height="100" width="100" src="" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="description" id="lblpurpose" class="bmd-label-floating">Description <span class="text-danger">*</span></label>
-                            <textarea class="form-control description" rows="8" name="description" id="description"></textarea>
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-description"></strong>
-                            </span>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description" id="lblpurpose" class="bmd-label-floating">Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control description" rows="8" name="description" id="description"></textarea>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-description"></strong>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <input type="hidden" name="action" id="action" value="Add" />
-                <input type="hidden" name="hidden_id" id="hidden_id" />
-              
-          </div>
-          <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-danger  text-uppercase" data-dismiss="modal">Close</button>
-            <input type="submit" name="action_button" id="action_button" class="btn btn-primary text-uppercase" value="Save" />
-          </div>
+                    <input type="hidden" name="action" id="action" value="Add" />
+                    <input type="hidden" name="hidden_id" id="hidden_id" />
+                
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-danger  text-uppercase" data-dismiss="modal">Close</button>
+                <input type="submit" name="action_button" id="action_button" class="btn btn-primary text-uppercase" value="Save" />
+            </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </form>
+        </div>
+   </form>
 
 @section('footer')
     @include('../partials.admin.footer')

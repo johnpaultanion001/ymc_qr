@@ -29,6 +29,7 @@ class HomeController extends Controller
     {
        $students = Student::where('isRemove', 0)->latest()->get();
        $events = Event::where('isRemove', 0)->orderBy('date', 'asc')->get();
-       return view('admin.home', compact('students','events'));
+       $users = User::latest()->get();
+       return view('admin.home', compact('students','events','users'));
     }
 }

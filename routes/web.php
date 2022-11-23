@@ -36,4 +36,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('schedule_activities', 'ScheduleActivitiesController@index')->name('schedule_activities.index');
 
+    //Accounts
+    Route::get('trainors', 'AccountController@trainors')->name('account.trainors');
+    Route::get('animators', 'AccountController@animators')->name('account.animators');
+
+    Route::post('account/store', 'AccountController@store')->name('account.store');
+    Route::get('account/{account}/edit', 'AccountController@edit')->name('account.edit');
+    Route::put('account/{account}', 'AccountController@update')->name('account.update');
+    Route::delete('account/{account}', 'AccountController@destroy')->name('account.destroy');
 });

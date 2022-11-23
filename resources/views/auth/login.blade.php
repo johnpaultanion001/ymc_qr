@@ -66,7 +66,6 @@
                
                 <button type="submit" class="btn btn-primary btn-lg"> Login </button>
               </div>
-              <p class="description text-center">Not a member? <a href="/register">Register Now</a> </p>
               <p class="description text-center"><a href="/password/reset">Forgot your password?</a></p>
               <br><br>
             </form>

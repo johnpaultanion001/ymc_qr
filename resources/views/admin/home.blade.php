@@ -37,7 +37,7 @@
                             <div class="col-12">
                                 <a href="/admin/patient_list">
                                     <div class="card card-block text-info  border-left-0 border-top-o border-bottom-0 bg-white btn" style="border: 1px solid #111;">
-                                        <h3 style="color: #111;">2</h3>
+                                        <h3 style="color: #111;">{{$users->where('role','trainor')->count()}}</h3>
                                         <span class="small text-uppercase font-weight-bold" style="color: #111;">TRAINORS TOTAL</span>
                                     </div>
                                 </a>
@@ -57,7 +57,7 @@
                             <div class="col-12">
                                 <a href="/admin/doctors">
                                     <div class="card card-block text-info  border-left-0 border-top-o border-bottom-0 bg-white btn" style="border: 1px solid #111;">
-                                        <h3 style="color: #111;">3</h3>
+                                        <h3 style="color: #111;">{{$users->where('role','animator')->count()}}</h3>
                                         <span class="small text-uppercase font-weight-bold" style="color: #111;">ANIMATORS TOTAL</span>
                                     </div>
                                 </a>
