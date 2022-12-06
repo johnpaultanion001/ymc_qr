@@ -31,6 +31,8 @@ class StudentController extends Controller
         ];
 
         if($student->status == 'PENDING'){
+          
+
             $emailNotif['notif_message']  = 'You have Successfully registered, Check your qr code below';
             Mail::to($student->email)
                 ->send(new EmailNotification($emailNotif));
