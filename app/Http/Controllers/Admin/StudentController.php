@@ -9,6 +9,7 @@ use Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailNotification;
 use File;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -36,6 +37,12 @@ class StudentController extends Controller
             $emailNotif['notif_message']  = 'You have Successfully registered, Check your qr code below';
             Mail::to($student->email)
                 ->send(new EmailNotification($emailNotif));
+
+            $image = \QrCode::format('png')
+                 ->size(200)
+                 ->generate( $student->id);
+            $output_file = $student->id . '.png';
+            Storage::disk('public')->put($output_file, $image);
 
             $student->update([
                 'status' => 'APPROVED'
