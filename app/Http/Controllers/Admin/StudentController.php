@@ -25,6 +25,7 @@ class StudentController extends Controller
 
         $emailNotif = [
             'notif_message'     => '',
+            'id'              =>  $student->id,
             'name'              =>  $student->name,
             'register_at'       =>  $student->created_at->format('F d,Y '),
             'approved_by'       =>  auth()->user()->name,
@@ -41,8 +42,9 @@ class StudentController extends Controller
             $image = \QrCode::format('png')
                  ->size(200)
                  ->generate( $student->id);
-            $output_file = $student->id . '.png';
-            Storage::disk('public')->put($output_file, $image);
+            $output_file = '/qr_code/'. $student->id . '.png';
+            File::put(public_path($output_file), $image);
+            
 
             $student->update([
                 'status' => 'APPROVED'

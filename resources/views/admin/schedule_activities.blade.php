@@ -51,7 +51,9 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
     function calendaryo(){  
+        
         events={!! json_encode($events) !!}; 
+        console.log(events)
         $('#calendar').fullCalendar({
             events: events,
             selectable: true,

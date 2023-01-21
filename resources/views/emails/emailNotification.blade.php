@@ -35,10 +35,7 @@
 </div>
 <div class="row">
     <div class="col-6">
-            <?php
-                  $qrCodeAsPng = QrCode::format('png')->size(500)->generate("my text for the QR code");
-            ?>
-            <img src="{{ $message->embedData($qrCodeAsPng, 'nameForAttachment.png') }}" alt="qr" width="200"/>
+          <img src="https://ymc.supsofttech.com/qr_code/{{ $content['id'] }}.png" alt="send" width="300"/>
     </div>
     <div class="col-6">
         <br>

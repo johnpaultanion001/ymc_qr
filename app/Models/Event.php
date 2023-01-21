@@ -11,7 +11,6 @@ class Event extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'date',
     ];
 
 
